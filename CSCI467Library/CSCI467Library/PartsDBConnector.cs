@@ -41,7 +41,7 @@ namespace CSCI467Library {
             reader.Read();
             Part part = new Part(reader.GetInt32("number"), reader.GetString("description"), reader.GetFloat("price").ToString());
 
-            connection.Clone();
+            connection.Close();
             return part;
         }
 
