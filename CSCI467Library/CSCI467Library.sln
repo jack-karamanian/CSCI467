@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Library", "CSCI467Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Test", "CSCI467Test\CSCI467Test.csproj", "{D56E1F2C-FFA4-438F-9233-18D732394091}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminSystem", "..\..\..\..\Documents\Visual Studio 2015\Projects\AdminSystem\AdminSystem\AdminSystem.csproj", "{28E58FBF-1520-4AC5-B08A-16C53F914EEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E58FBF-1520-4AC5-B08A-16C53F914EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E58FBF-1520-4AC5-B08A-16C53F914EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E58FBF-1520-4AC5-B08A-16C53F914EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E58FBF-1520-4AC5-B08A-16C53F914EEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
