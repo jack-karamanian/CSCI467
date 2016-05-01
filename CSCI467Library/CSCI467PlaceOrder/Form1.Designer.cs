@@ -35,6 +35,7 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.partBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.partListPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.partListBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.partBindingSource)).BeginInit();
@@ -42,6 +43,7 @@
             // 
             // partListPanel
             // 
+            this.partListPanel.Controls.Add(this.searchTextBox);
             this.partListPanel.Controls.Add(this.partListBox);
             this.partListPanel.Location = new System.Drawing.Point(12, 12);
             this.partListPanel.Name = "partListPanel";
@@ -81,7 +83,7 @@
             this.partListBox.DataSource = this.partBindingSource;
             this.partListBox.Location = new System.Drawing.Point(0, 3);
             this.partListBox.Name = "partListBox";
-            this.partListBox.Size = new System.Drawing.Size(872, 461);
+            this.partListBox.Size = new System.Drawing.Size(872, 418);
             this.partListBox.TabIndex = 0;
             // 
             // Select
@@ -121,6 +123,14 @@
             // 
             this.partBindingSource.DataSource = typeof(CSCI467Library.Part);
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Location = new System.Drawing.Point(0, 428);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(309, 20);
+            this.searchTextBox.TabIndex = 1;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,6 +142,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.partListPanel.ResumeLayout(false);
+            this.partListPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.partListBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.partBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -151,6 +162,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.BindingSource partBindingSource;
+        private System.Windows.Forms.TextBox searchTextBox;
     }
 }
 
