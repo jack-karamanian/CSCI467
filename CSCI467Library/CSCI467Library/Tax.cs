@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CSCI467Library {
-    class Tax {
+    public class Tax {
         public double StateRate { get; set; }
         public double CountyRate { get; set; }
         public double FederalRate { get; set; }

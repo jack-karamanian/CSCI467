@@ -1,0 +1,93 @@
+﻿@model CSCI467PlaceOrderMVC.Models.InfoModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    IList<CSCI467PlaceOrderMVC.Models.OrderModel> Orders = ViewBag.Orders;
+}
+
+<style>
+    table, th, td {
+        border: solid black 1px;
+    }
+    
+    label {
+        display: inline-block;
+        width: 100px;
+    }
+</style>
+
+
+<h1>Your Order</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    @foreach (var order in Orders)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => order.Part.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Part.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Part.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => order.Quantity)
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    <h2>Subtotal:</h2>
+    <h2>
+        @{double total = 0.0f;}
+        @foreach (var order in Orders) {
+            total += order.Quantity * Convert.ToDouble(order.Part.Price);
+        }
+        @total
+    </h2>
+</div>
+
+<div>
+    <h1>Enter Info:</h1>
+    <form action="/Order/EnterCreditCard" method="post">
+        
+        <label >First Name: </label>
+        @Html.EditorFor(m => m.FirstName)
+        <br>
+
+        <label>Last Name: </label>
+        @Html.EditorFor(m => m.LastName)
+        <br>
+
+        <label>Address: </label>
+        @Html.EditorFor(m => m.Address)
+        <br>
+
+        <label>State/Province: </label>
+        <select id="State" name="State">
+            @{ var states = ViewBag.TaxInfo.Keys; }
+            @foreach (var state in states) {
+                <option value="@state">@state</option>
+            }
+        </select>
+        <br>
+
+        <label for="zipCode">ZIP Code:</label>
+        @Html.EditorFor(m => m.ZIP)
+        <br>
+
+        <input type="hidden" id="SubTotal" name ="SubTotal" value="@total" />
+
+        <input type="submit"/>
+    </form>
+</div>
