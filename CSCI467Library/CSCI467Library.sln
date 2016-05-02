@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Library", "CSCI467Library\CSCI467Library.csproj", "{A8EFB170-9712-4780-B653-556312B51C7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Test", "CSCI467Test\CSCI467Test.csproj", "{D56E1F2C-FFA4-438F-9233-18D732394091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System", "..\..\RecievingDesk\RecievingDesk\System.csproj", "{CC6DE248-3E9E-4020-810B-7210AA7B14BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56E1F2C-FFA4-438F-9233-18D732394091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
