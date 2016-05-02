@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace CSCI467Library {
     public class PartsDBConnector {
-        static readonly string GetAllPartsQuery = "SELECT * FROM parts";
+        static readonly string GetAllPartsQuery = "SELECT * FROM `parts`";
 
         MySqlConnection connection;
         public PartsDBConnector(string host, int port, string username, string password) {

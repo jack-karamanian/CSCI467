@@ -1,0 +1,84 @@
+﻿@model IList<CSCI467PlaceOrderMVC.Models.OrderModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    ViewBag.Title = "Order Items";
+}
+<style>
+    table, th, td {
+        border: solid black 1px;
+    }
+</style>
+<h1>Select Items</h1>
+
+@using (Html.BeginForm("EnterInfo", "Order", FormMethod.Post))
+{
+    <div style="height: 600px; overflow: auto;">
+        <table>
+            <tr>
+                <th>Select</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" />
+                    </td>
+                    <td>
+                        @Html.HiddenFor(order => order[i].Part.ID)
+                        @Html.DisplayFor(order => order[i].Part.ID)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(order => order[i].Part.Name)
+                        @Html.DisplayFor(order => order[i].Part.Name)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(order => order[i].Part.Price)
+                        @Html.DisplayFor(order => order[i].Part.Price)
+                    </td>
+                    <td>
+                        @Html.EditorFor(order => order[i].Quantity)
+                    </td>
+                </tr>
+            }
+        </table>
+        <input type="submit" />
+    </div>
+}
+
+<script>
+        var total = 0.0;
+        function onCheckBoxClick(index) {
+
+            var grid = document.getElementById("<%=GridView1.ClientID%>");
+
+            var checkbox = grid.rows[index + 1].cells[0].children[0];
+            var price = grid.rows[index + 1].cells[3];
+            var quantity = grid.rows[index + 1].cells[4].children[0];
+
+
+            if(checkbox.checked) {
+                quantity.value = 1;
+                total += Number(price.innerHTML);
+                quantity.readOnly = false;
+            } else {
+                var oldQuantity = quantity.value;
+                quantity.value = 0;
+                quantity.readOnly = true;
+                total -= Number(price.innerHTML) * oldQuantity;
+            }
+            document.getElementById("subtotal").innerHTML = String(total);
+
+        }
+        
+        function onQuantityChange(quantity) {
+
+        }
+
+</script>
