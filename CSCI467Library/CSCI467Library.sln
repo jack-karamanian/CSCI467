@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Library", "CSCI467Library\CSCI467Library.csproj", "{A8EFB170-9712-4780-B653-556312B51C7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Test", "CSCI467Test\CSCI467Test.csproj", "{D56E1F2C-FFA4-438F-9233-18D732394091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecievingDesk", "..\..\..\Visual Studio 2015\Projects\RecievingDesk\RecievingDesk\RecievingDesk.csproj", "{CC6DE248-3E9E-4020-810B-7210AA7B14BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecievingDesk", "RecievingDesk\RecievingDesk.csproj", "{CC6DE248-3E9E-4020-810B-7210AA7B14BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
