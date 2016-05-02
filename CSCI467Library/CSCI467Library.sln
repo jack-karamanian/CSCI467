@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467Test", "CSCI467Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecievingDesk", "RecievingDesk\RecievingDesk.csproj", "{CC6DE248-3E9E-4020-810B-7210AA7B14BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467PlaceOrderMVC", "..\..\..\..\Documents\GitHub\CSCI467\CSCI467Library\CSCI467PlaceOrderMVC\CSCI467PlaceOrderMVC.csproj", "{33CF8958-71E0-47EE-AD91-F4C9A300CED2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "..\..\..\..\Documents\GitHub\CSCI467\CSCI467Library\Database1\Database.sqlproj", "{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,16 @@ Global
 		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC6DE248-3E9E-4020-810B-7210AA7B14BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CF8958-71E0-47EE-AD91-F4C9A300CED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CF8958-71E0-47EE-AD91-F4C9A300CED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CF8958-71E0-47EE-AD91-F4C9A300CED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CF8958-71E0-47EE-AD91-F4C9A300CED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BE6C14-6853-49E3-B9BC-D0ABB71FA36B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
