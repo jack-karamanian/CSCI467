@@ -9,34 +9,37 @@ using System.Data;
 using System.Windows.Forms;
 using CSCI467Library;
 
-namespace CSCI467Library {
-    public class Employee {
-
-        public int ID { get; set; }
-        public string Password { get; set; }
-        private MySqlDataAdapter adapter;
-        private MySqlCommandBuilder builder;
-        MySqlConnection connection;
-
-        public Employee()
-        {
-            ID = 0;
-            Password = "";
-            EmployeeDBConnect();
-        }
-
-        public Employee(int id, string password) {
-            ID = id;
-            Password = password;
-            EmployeeDBConnect();
-        }
-        
+namespace CSCI467Library
+{
+    public class LogIn
+    {
         string host = "sql5.freemysqlhosting.net";
         int port = 3306;
         string username = "sql5117893";
         string password = "XSHuaIJZLY";
 
-        public void EmployeeDBConnect()
+        public bool Is_Admin { get; set; }
+        public bool Is_MidManager { get; set; }
+        public bool Is_Reciever { get; set; }
+
+        private MySqlDataAdapter adapter;
+        private MySqlCommandBuilder builder;
+        MySqlConnection connection;
+
+        public LogIn()
+        {
+            LogInDBConnect();
+        }
+
+        public LogIn(string id, string password)
+        {
+            LogInDBConnect();
+            Is_Admin = Verify_Admin(id, password);
+            Is_MidManager = Verify_MidManager(id, password);
+            Is_Reciever = Verify_Reciever(id, password);
+        }
+
+        public void LogInDBConnect()
         {
             string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database=sql5117893;", host, port, username, password);
             connection = new MySqlConnection(connectionString);
