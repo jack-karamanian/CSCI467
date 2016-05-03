@@ -5,49 +5,55 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql;
 using MySql.Data.MySqlClient;
+using System.Data;
+using System.Windows.Forms;
 
 namespace CSCI467Library {
     public class PartsDBConnector {
-        static readonly string GetAllPartsQuery = "SELECT * FROM parts";
-
+        private MySqlDataAdapter adapter;
+        private MySqlCommandBuilder builder;
+        private DataTable parts;
         MySqlConnection connection;
+
+        static readonly string GetAllPartsQuery = "SELECT * FROM parts;";
+
         public PartsDBConnector(string host, int port, string username, string password) {
             string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database=csci467;", host, port, username, password);
             connection = new MySqlConnection(connectionString);
         }
 
-        public List<Part> GetAllParts() {
-            List<Part> parts = new List<Part>();
+        public DataTable GetAllParts() {
+            parts = new DataTable();
 
-            connection.Open();
-            MySqlDataReader reader = QueryConnection(GetAllPartsQuery);
+            adapter = new MySqlDataAdapter(GetAllPartsQuery, connection);
+            builder = new MySqlCommandBuilder(adapter);
 
-            while (reader.Read()) {
-                var part = new Part(reader.GetInt32("number"), reader.GetString("description"), reader.GetFloat("price").ToString());
-                parts.Add(part);
-            }
-
-            connection.Close();
+            adapter.Fill(parts);
 
             return parts;
         }
 
-        public Part GetPartByID(int id) {
-            string query = String.Format("SELECT * FROM parts WHERE number = {0}", id);
+        public DataTable GetPartByID(string id) {
+            string query = "SELECT * FROM parts WHERE number = '" + id + "';";
 
-            connection.Open();
-            MySqlDataReader reader = QueryConnection(query);
+            parts = new DataTable();
 
-            reader.Read();
-            Part part = new Part(reader.GetInt32("number"), reader.GetString("description"), reader.GetFloat("price").ToString());
+            adapter = new MySqlDataAdapter(query, connection);
+            builder = new MySqlCommandBuilder(adapter);
 
-            connection.Close();
-            return part;
+            adapter.Fill(parts);
+
+            return parts;
         }
 
-        MySqlDataReader QueryConnection(string query) {
-            MySqlCommand command = new MySqlCommand(query, connection);
-            return command.ExecuteReader();
+        public void update()
+        {
+            DataTable changes = parts.GetChanges();
+            if (changes != null)
+            {
+                adapter.Update(changes);
+                parts.AcceptChanges();
+            }
         }
     }
 }
