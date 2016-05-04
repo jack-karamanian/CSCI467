@@ -8,8 +8,10 @@ namespace CSCI467Library {
         public MySqlCommandBuilder builder;
         public DataTable parts;
         public MySqlConnection connection;
-        
-        static readonly string GetAllPartsQuery = "SELECT * FROM parts;";
+
+        private string database = "csci467";
+
+        static readonly string GetAllPartsQuery = "SELECT * FROM ";
 
         public PartsDBConnector()
         {
@@ -17,15 +19,15 @@ namespace CSCI467Library {
             connection = new MySqlConnection(connectionString);
         }
 
-        public PartsDBConnector(string host, int port, string username, string password) {
-            string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database=csci467;", host, port, username, password);
+        public PartsDBConnector(string host, int port, string username, string password,string database) {
+            string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database={4};", host, port, username, password,database);
             connection = new MySqlConnection(connectionString);
         }
 
-        public DataTable GetAllParts() {
+        public DataTable GetAllParts(string table) {
             parts = new DataTable();
 
-            adapter = new MySqlDataAdapter(GetAllPartsQuery, connection);
+            adapter = new MySqlDataAdapter(GetAllPartsQuery + table, connection);
             builder = new MySqlCommandBuilder(adapter);
 
             adapter.Fill(parts);

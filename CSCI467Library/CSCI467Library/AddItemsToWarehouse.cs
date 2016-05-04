@@ -10,9 +10,7 @@ namespace CSCI467Library
         public PartsDBConnector legacy_Parts { get; set; }
         private int Amount_Instock { get; set; }
 
-        private MySqlDataAdapter adapter;
-        private MySqlCommandBuilder builder;
-        MySqlConnection connection;
+        public MySqlConnection connection;
 
         string host = "sql5.freemysqlhosting.net";
         int port = 3306;
@@ -58,6 +56,28 @@ namespace CSCI467Library
                     Amount_Instock += quantity_rec;
                     cmd = new MySqlCommand("UPDATE TABLE WareHouseItems SET current_Total_InStock='" + Amount_Instock.ToString() +
                                 "' WHERE part_id='" + part_id + "'", connection);
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+            }
+        }
+
+        public void Delete_RecievedInventory()
+        {
+            MySqlDataReader reader = null;
+
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM RecieveItems_ToBeAdded WHERE part_id != 'OoOo'", connection);
+            try
+            {
+                reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return;
                 }
             }
             catch (MySqlException ex)
