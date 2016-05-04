@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Windows.Forms;
-using CSCI467Library;
 
 namespace CSCI467Library {
     public class PartsDBConnector {
-        private MySqlDataAdapter adapter;
-        private MySqlCommandBuilder builder;
-        private DataTable parts;
-        MySqlConnection connection;
+        public MySqlDataAdapter adapter;
+        public MySqlCommandBuilder builder;
+        public DataTable parts;
+        public MySqlConnection connection;
         
         static readonly string GetAllPartsQuery = "SELECT * FROM parts;";
 

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AddItemsToWarehouse.cs" />
     <Compile Include="LogIn.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="Customer.cs" />
@@ -64,24 +65,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="DTSLib">
-      <Guid>{FAD11436-A84C-4720-8D20-B07FE84FDE74}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="DTSPipeline">
-      <Guid>{6E944EA2-14A0-4997-98FA-3E1995D80BD9}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="TxAgg">
       <Guid>{C44E187D-EEEA-4ACA-B91D-A136C68E90F8}</Guid>
       <VersionMajor>1</VersionMajor>

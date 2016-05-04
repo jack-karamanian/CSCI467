@@ -1,30 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql;
 using MySql.Data.MySqlClient;
-using System.Data;
-using System.Windows.Forms;
-using CSCI467Library;
 
 namespace CSCI467Library
 {
     public class LogIn
     {
+        public bool Is_Admin;
+        public bool Is_MidManager;
+        public bool Is_Reciever;
+
+        private MySqlDataAdapter adapter;
+        private MySqlCommandBuilder builder;
+        public MySqlConnection connection;
+
         string host = "sql5.freemysqlhosting.net";
         int port = 3306;
         string username = "sql5117893";
         string password = "XSHuaIJZLY";
 
-        public bool Is_Admin { get; set; }
-        public bool Is_MidManager { get; set; }
-        public bool Is_Reciever { get; set; }
+        public void LogInDBConnect()
+        {
+            if (connection != null)
+                connection.Close();
 
-        private MySqlDataAdapter adapter;
-        private MySqlCommandBuilder builder;
-        MySqlConnection connection;
+            string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
+                host, username, password, port);
+
+            try
+            {
+                connection = new MySqlConnection(connStr);
+                connection.Open();
+
+                connection.ChangeDatabase("sql5117893");
+            }
+            catch
+            {
+            }
+        }
 
         public LogIn()
         {
@@ -39,118 +51,88 @@ namespace CSCI467Library
             Is_Reciever = Verify_Reciever(id, password);
         }
 
-        public void LogInDBConnect()
+        public bool Verify_Admin(string id, string pw)
         {
-            string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database=sql5117893;", host, port, username, password);
-            connection = new MySqlConnection(connectionString);
-        }
-
-        public bool Verify_Admin(string id, string password)
-        {
-            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "';";
-
+            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "'";
+            
             adapter = new MySqlDataAdapter(query, connection);
             builder = new MySqlCommandBuilder(adapter);
+
+            MySqlDataReader reader = null;
+
             using (MySqlCommand cmd = new MySqlCommand(query, connection))
             {
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (reader = cmd.ExecuteReader())
                 {
-                    //DateTime mytime = DateTime.Now  ;
-                    if (reader.HasRows)
+                    if (reader.Read())
                     {
-                        if (Convert.ToString(reader["password"]) != password)
+                        if (Convert.ToString(reader["password"]) == pw)
                         {
-                            reader.Close();
-                            connection.Close();
-                            return false;
+                            if (id[0] == 'A')
+                            {
+                                return true;
+                            }
                         }
-                        else
-                        {
-                            connection.Close();
-                            reader.Close();
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        reader.Close();
-                        connection.Close();
-                        return false;
                     }
                 }
             }
+            return false;
         }
 
-        public bool Verify_Reciever(string id, string password)
+        public bool Verify_Reciever(string id, string pw)
         {
-            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "';";
+            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "'";
 
             adapter = new MySqlDataAdapter(query, connection);
             builder = new MySqlCommandBuilder(adapter);
+
+            MySqlDataReader reader = null;
+
             using (MySqlCommand cmd = new MySqlCommand(query, connection))
             {
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (reader = cmd.ExecuteReader())
                 {
-                    //DateTime mytime = DateTime.Now  ;
-                    if (reader.HasRows)
+                    if (reader.Read())
                     {
-                        if (Convert.ToString(reader["password"]) != password)
+                        if (Convert.ToString(reader["password"]) == pw)
                         {
-                            reader.Close();
-                            connection.Close();
-                            return false;
+                            if (id[0] == 'e')
+                            {
+                                return true;
+                            }
                         }
-                        else
-                        {
-                            connection.Close();
-                            reader.Close();
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        reader.Close();
-                        connection.Close();
-                        return false;
                     }
                 }
             }
+            return false;
         }
 
-        public bool Verify_MidManager(string id, string password)
+        public bool Verify_MidManager(string id, string pw)
         {
-            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "';";
+            string query = "SELECT * FROM loginData WHERE emp_id='" + id + "'";
 
             adapter = new MySqlDataAdapter(query, connection);
             builder = new MySqlCommandBuilder(adapter);
+
+            MySqlDataReader reader = null;
+
             using (MySqlCommand cmd = new MySqlCommand(query, connection))
             {
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (reader = cmd.ExecuteReader())
                 {
-                    //DateTime mytime = DateTime.Now  ;
-                    if (reader.HasRows)
+                    if (reader.Read())
                     {
-                        if (Convert.ToString(reader["password"]) != password)
+                        if (Convert.ToString(reader["password"]) == pw)
                         {
-                            reader.Close();
-                            connection.Close();
-                            return false;
+                            if (id[0] == 'k')
+                            {
+                                return true;
+                            }
                         }
-                        else
-                        {
-                            connection.Close();
-                            reader.Close();
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        reader.Close();
-                        connection.Close();
-                        return false;
                     }
                 }
             }
+            return false;
         }
     }
 }

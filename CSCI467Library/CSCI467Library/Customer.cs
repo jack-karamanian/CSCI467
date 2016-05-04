@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Windows.Forms;
-using CSCI467Library;
 
 namespace CSCI467Library {
 
@@ -15,18 +8,42 @@ namespace CSCI467Library {
 
         private MySqlDataAdapter adapter;
         private MySqlCommandBuilder builder;
-        private DataTable parts;
         MySqlConnection connection;
 
         public string ID { get; private set; }
         public string Name { get; private set; }
         public Address Address { get; private set; }
 
+        string host = "sql5.freemysqlhosting.net";
+        int port = 3306;
+        string username = "sql5117893";
+        string password = "XSHuaIJZLY";
+
+        public void CustomerConnect()
+        {
+            if (connection != null)
+                connection.Close();
+
+            string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
+                host, username, password,port);
+
+            try
+            {
+                connection = new MySqlConnection(connStr);
+                connection.Open();
+            }
+            catch
+            {
+                return;
+            }
+        }
         public Customer()
         {
             Name = "";
             Address = new Address();
             ID = "";
+
+            CustomerConnect();
         }
 
         public Customer(string name, string id, Address address) {
@@ -34,6 +51,8 @@ namespace CSCI467Library {
             Address temp = new Address();
             Address = temp.GetAddressBy_ID(id);
             ID = id;
+
+            CustomerConnect();
         }
 
         public void Add_CustomerToStorage()
@@ -61,7 +80,7 @@ namespace CSCI467Library {
                     if (reader.HasRows)
                     {
                         temp.ID = (Convert.ToString(reader["customer_id"]));
-                        temp.Name = Int32.Parse((Convert.ToString(reader["name"])));
+                        temp.Name = (Convert.ToString(reader["name"]));
                     }
                 }
             }

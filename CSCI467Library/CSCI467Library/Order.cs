@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Windows.Forms;
-using CSCI467Library;
 
 namespace CSCI467Library {
     class Order {
         private MySqlDataAdapter adapter;
         private MySqlCommandBuilder builder;
-        private DataTable parts;
         MySqlConnection connection;
         
         public Address Destination { get; set; }
@@ -25,17 +18,41 @@ namespace CSCI467Library {
         public Customer customerInfo { get; set; }
         public List<Part> PartsOrdered { get; private set; }
 
-        string partID_fromStorage = null;
+        string host = "sql5.freemysqlhosting.net";
+        int port = 3306;
+        string username = "sql5117893";
+        string password = "XSHuaIJZLY";
+
+        public void OrderDBConnect()
+        {
+            if (connection != null)
+                connection.Close();
+
+            string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
+                host, username, password, port);
+
+            try
+            {
+                connection = new MySqlConnection(connStr);
+                connection.Open();
+            }
+            catch
+            {
+            }
+        }
 
         public Order()
         {
             Destination = new Address();
             TimeOrdered = new DateTime();
             TaxRates = new Tax();
-            order_id = 0;
+            order_id = "";
             SubTotal = 0;
             Total = 0;
             PartsOrdered = new List<Part>();
+
+            OrderDBConnect();
+
         }
 
         public Order(Address destination, DateTime timeOrdered, Tax taxes, double subTotal, double total, List<Part> parts) {
@@ -46,6 +63,8 @@ namespace CSCI467Library {
             Total = total;
             PartsOrdered = parts;
             Add_OrderToStorage(this);
+
+            OrderDBConnect();
         }
 
         public void Add_OrderToStorage(Order newOrder)

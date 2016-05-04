@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql;
 using MySql.Data.MySqlClient;
-using System.Data;
-using System.Windows.Forms;
-using CSCI467Library;
 
 namespace CSCI467Library {
 
@@ -15,7 +7,6 @@ namespace CSCI467Library {
 
         private MySqlDataAdapter adapter;
         private MySqlCommandBuilder builder;
-        private DataTable parts;
         MySqlConnection connection;
 
         public string house_number { get; private set; }
@@ -25,14 +16,39 @@ namespace CSCI467Library {
         public int ZIPCode { get; private set; }
         public string State { get; private set; }
 
+        string host = "sql5.freemysqlhosting.net";
+        int port = 3306;
+        string username = "sql5117893";
+        string password = "XSHuaIJZLY";
+
+        public void AddressConnect()
+        {
+            if (connection != null)
+                connection.Close();
+
+            string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
+                host, username, password,port);
+
+            try
+            {
+                connection = new MySqlConnection(connStr);
+                connection.Open();
+            }
+            catch
+            {
+            }
+        }
+
         public Address()
         {
-            house_number = 0;
+            house_number = "";
             street_name = "";
             Country = "";
             ZIPCode = 0;
             State = "";
-            apartmentNUM = 0;
+            apartmentNUM = "";
+
+            AddressConnect();
         }
 
         public Address(string customer_id, string line1, string line2, string country, int zip, string state,string apartmentNumber) {
@@ -42,6 +58,9 @@ namespace CSCI467Library {
             ZIPCode = zip;
             State = state;
             apartmentNUM = apartmentNumber;
+
+            AddressConnect();
+
             Add_AddressToStorage(customer_id);
         }
 
