@@ -5,7 +5,7 @@ namespace CSCI467Library
 {
     public class LogIn
     {
-        public bool Is_Admin;
+        public bool Is_Admin { get; set; }
         public bool Is_MidManager;
         public bool Is_Reciever;
 

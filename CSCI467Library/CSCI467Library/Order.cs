@@ -55,10 +55,10 @@ namespace CSCI467Library {
 
         }
 
-        public Order(Address destination, DateTime timeOrdered, Tax taxes, double subTotal, double total, List<Part> parts) {
+        public Order(Address destination, DateTime timeOrdered, double taxes, double subTotal, double total, List<Part> parts) {
             Destination = destination;
             TimeOrdered = timeOrdered;
-            TaxRates = taxes;
+            TaxRates = new Tax(taxes);
             SubTotal = subTotal;
             Total = total;
             PartsOrdered = parts;
@@ -82,7 +82,7 @@ namespace CSCI467Library {
              adapter = new MySqlDataAdapter(query, connection);
              builder = new MySqlCommandBuilder(adapter);
         }
-
+        
         public Order GetOrderBy_ID(string Order_id)
         {
             string query = "select * from Order where order_num=\"" + Order_id + "\";";

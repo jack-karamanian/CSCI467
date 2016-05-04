@@ -80,7 +80,7 @@ namespace CSCI467Library
                     return;
                 }
             }
-            catch (MySqlException ex)
+            catch
             {
             }
             finally
