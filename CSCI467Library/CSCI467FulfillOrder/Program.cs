@@ -12,8 +12,36 @@ using System.Linq;
 
 namespace CSCI467FulfillOrder
 {
-    class Program
+    public class Program
     {
+        public string returnPath()
+        {
+            string folder = Environment.CurrentDirectory;
+            return folder;
+        }
+
+        public int runFulfillOrder()
+        {
+            string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
+                host, username, password, port);
+
+            OrderDBConnector orderDB = new OrderDBConnector(host, port, username, password, username);
+            Order order = orderDB.GetOldestOrder();
+
+            PartsDBConnector partsDB = new PartsDBConnector(partHost, partPort, partUsername, partPassword);
+
+            int oID = orderDB.GetPartID();
+
+            generatePackingList(partsDB, order, oID);
+            generateShippingLabel(partsDB, order, oID);
+            generateInvoice(partsDB, order, oID);
+
+            //orderDB.RemoveOldestOrder();
+
+            return 0;
+
+        }
+
         private static Excel.Workbook MyBook = null;
         private static Excel.Application MyApp = null;
         private static Excel.Worksheet MySheet = null;
@@ -28,7 +56,7 @@ namespace CSCI467FulfillOrder
         private static string partUsername = "student";
         private static string partPassword = "student";
 
-        static void Main(string[] args)
+        static void Main()
         {
             string connStr = String.Format("server={0};user id={1}; password={2}; database=sql5117893; port={3}",
                 host, username, password, port);
@@ -43,7 +71,11 @@ namespace CSCI467FulfillOrder
             generatePackingList(partsDB, order, oID);
             generateShippingLabel(partsDB, order, oID);
             generateInvoice(partsDB, order, oID);
+
+            //orderDB.RemoveOldestOrder();
         }
+
+        
 
         static void generateShippingLabel(PartsDBConnector partsDB, Order order, int  orderID)
         {
@@ -75,6 +107,8 @@ namespace CSCI467FulfillOrder
             //savePath = savePath + ;
 
             MySheet.SaveAs(path);
+
+            MySheet.PrintOutEx();
 
             MyApp.Quit();
         }
@@ -111,6 +145,7 @@ namespace CSCI467FulfillOrder
             //savePath = savePath + ;
 
             MySheet.SaveAs(path);
+            MySheet.PrintOutEx();
 
             MyApp.Quit();
         }
@@ -152,6 +187,7 @@ namespace CSCI467FulfillOrder
             path = path + "invoice" + orderID + ".xlsx";
 
             MySheet.SaveAs(path);
+            MySheet.PrintOutEx();
 
             MyApp.Quit();
         }

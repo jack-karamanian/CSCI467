@@ -11,7 +11,7 @@ namespace CSCI467Library {
 
         }
 
-        int ID;
+        private int ID = 0;
 
         public Order GetOldestOrder() {
             Connection.Open();
@@ -56,6 +56,10 @@ namespace CSCI467Library {
             Connection.Close();
         }
 
+        public int GetPartID()
+        {
+            return ID;
+        }
 
         public void AddOrder(Order order) {
             Connection.Open();
@@ -88,12 +92,6 @@ namespace CSCI467Library {
 
             Connection.Close();
         }
-
-        public int GetPartID()
-        {
-            return ID;
-        }
-
 
         Dictionary<int, int> GetQuantities(int id) {
             Dictionary<int, int> partQuantities = new Dictionary<int, int>();

@@ -50,6 +50,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="DBConnector.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="LoginDBConnector.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderDBConnector.cs" />
     <Compile Include="Part.cs" />

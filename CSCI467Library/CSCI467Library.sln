@@ -15,6 +15,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database1\Datab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467FulfillOrder", "CSCI467FulfillOrder\CSCI467FulfillOrder.csproj", "{7226C58C-2C25-49E4-817A-85B451EC51BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSCI467RecievingDesk", "CSCI467RecievingDesk\CSCI467RecievingDesk.csproj", "{779058EF-15A0-4C1D-BFA3-7477ECA67C6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{7226C58C-2C25-49E4-817A-85B451EC51BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7226C58C-2C25-49E4-817A-85B451EC51BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7226C58C-2C25-49E4-817A-85B451EC51BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{779058EF-15A0-4C1D-BFA3-7477ECA67C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{779058EF-15A0-4C1D-BFA3-7477ECA67C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{779058EF-15A0-4C1D-BFA3-7477ECA67C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{779058EF-15A0-4C1D-BFA3-7477ECA67C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
