@@ -5,24 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CSCI467Library {
-    class Order {
+    public class Order {
         public Address Destination { get; set; }
         public DateTime TimeOrdered { get; set; }
-        public Tax TaxRates { get; set; }
+        public double TaxRate { get; set; }
+        public double Shipping { get; set; }
         public double SubTotal { get; set; }
         public double Total { get; set; }
         public Customer Customer { get; set; }
         public Dictionary<int, int> PartsOrdered { get; private set; }
 
-        public Order(Address destination, DateTime timeOrdered, Tax taxes, double subTotal, double total, Customer customer, List<Part> parts) {
+        public Order(Address destination, DateTime timeOrdered, double taxes, double shipping, double subTotal, double total, Customer customer, Dictionary<int, int> parts) {
             Destination = destination;
             TimeOrdered = timeOrdered;
-            TaxRates = taxes;
+            TaxRate = taxes;
+            Shipping = shipping;
             SubTotal = subTotal;
             Total = total;
             Customer = customer;
-            PartsOrdered = new Dictionary<int, int>();
-            FillParts(parts);
+            PartsOrdered = parts;
+            
         }
 
         private void FillParts(List<Part> parts) {

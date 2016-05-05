@@ -85,8 +85,10 @@
     <Compile Include="Address.cs" />
     <Compile Include="CreditCard.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="DBConnector.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrderDBConnector.cs" />
     <Compile Include="Part.cs" />
     <Compile Include="PartsDBConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

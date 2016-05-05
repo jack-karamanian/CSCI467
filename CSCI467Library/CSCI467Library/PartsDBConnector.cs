@@ -7,19 +7,17 @@ using MySql;
 using MySql.Data.MySqlClient;
 
 namespace CSCI467Library {
-    public class PartsDBConnector {
+    public class PartsDBConnector : DBConnector {
         static readonly string GetAllPartsQuery = "SELECT * FROM `parts`";
 
-        MySqlConnection connection;
-        public PartsDBConnector(string host, int port, string username, string password) {
-            string connectionString = String.Format("server={0};port={1};uid={2};pwd={3};database=csci467;", host, port, username, password);
-            connection = new MySqlConnection(connectionString);
+        public PartsDBConnector(string host, int port, string username, string password) : base(host, port, username, password, "csci467") {
+            
         }
 
         public List<Part> GetAllParts() {
             List<Part> parts = new List<Part>();
 
-            connection.Open();
+            Connection.Open();
             MySqlDataReader reader = QueryConnection(GetAllPartsQuery);
 
             while (reader.Read()) {
@@ -27,7 +25,7 @@ namespace CSCI467Library {
                 parts.Add(part);
             }
 
-            connection.Close();
+            Connection.Close();
 
             return parts;
         }
@@ -35,18 +33,18 @@ namespace CSCI467Library {
         public Part GetPartByID(int id) {
             string query = String.Format("SELECT * FROM parts WHERE number = {0}", id);
 
-            connection.Open();
+            Connection.Open();
             MySqlDataReader reader = QueryConnection(query);
 
             reader.Read();
             Part part = new Part(reader.GetInt32("number"), reader.GetString("description"), reader.GetFloat("price").ToString());
 
-            connection.Close();
+            Connection.Close();
             return part;
         }
 
         MySqlDataReader QueryConnection(string query) {
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand(query, Connection);
             return command.ExecuteReader();
         }
     }
