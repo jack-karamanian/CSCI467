@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace CSCI467Library {
-    class OrderDBConnector : DBConnector {
-        public OrderDBConnector(string host, int port, string username, string password, string database) : base(host, host, username, password, database) {
+    public class OrderDBConnector : DBConnector {
+        public OrderDBConnector(string host, int port, string username, string password, string database) : base(host, port, username, password, database) {
 
         }
 
         public Order GetOldestOrder() {
             Connection.Open();
 
-            var command = new MySqlCommand("SELECT MIN(time_ordered) FROM `orders` ORDER BY time_ordered ASC;", Connection);
+            var command = new MySqlCommand("SELECT * FROM `orders` ORDER BY time_ordered ASC LIMIT 1;", Connection);
             var reader = command.ExecuteReader();
 
             reader.Read();
@@ -27,11 +27,16 @@ namespace CSCI467Library {
             var time = reader.GetDateTime("time_ordered");
             var total = reader.GetFloat("total");
             var subtotal = reader.GetFloat("subtotal");
+            var tax = reader.GetFloat("tax");
+            var shipping = reader.GetFloat("shipping");
+            
+            
 
+            Connection.Close();
+            Connection.Open();
             var quantities = GetQuantities(id);
 
-            var order = new Order(new Address(address, "", "US", zip, state), time, null, subtotal, total, new Customer(firstName + " " + lastName, null), quantities);
-
+            var order = new Order(new Address(address, "", "US", zip, state), time, tax, shipping, subtotal, total, new Customer(firstName + " " + lastName, null), quantities);
             Connection.Close();
 
             return order;
@@ -39,7 +44,7 @@ namespace CSCI467Library {
 
         public void RemoveOldestOrder() {
             Connection.Open();
-
+            
             var command = new MySqlCommand("DELETE FROM `orders` WHERE order_num = (SELECT order_num FROM `orders` WHERE time_ordered = MIN(time_ordered));", Connection);
             command.ExecuteNonQuery();
 
@@ -49,7 +54,7 @@ namespace CSCI467Library {
         public void AddOrder(Order order) {
             Connection.Open();
 
-            var addCommand = new MySqlCommand("INSERT INTO `orders` (order_num, time_ordered, fname, lname, address, state, zip_code, total, subtotal) VALUES (NULL, @time_ordered, @fname, @lname, @address, @state, @zip_code, @total, @subtotal)", Connection);
+            var addCommand = new MySqlCommand("INSERT INTO `orders` (order_num, time_ordered, fname, lname, address, state, zip_code, total, subtotal, tax, shipping) VALUES (NULL, @time_ordered, @fname, @lname, @address, @state, @zip_code, @total, @subtotal, @tax, @shipping)", Connection);
             addCommand.Parameters.AddWithValue("@time_ordered", DateTime.Now);
 
             var name = order.Customer.Name.Split(' ');
@@ -61,6 +66,8 @@ namespace CSCI467Library {
             addCommand.Parameters.AddWithValue("@zip_code", order.Destination.ZIPCode.ToString());
             addCommand.Parameters.AddWithValue("@total", order.Total);
             addCommand.Parameters.AddWithValue("@subtotal", order.SubTotal);
+            addCommand.Parameters.AddWithValue("@tax", order.TaxRate);
+            addCommand.Parameters.AddWithValue("@shipping", order.Shipping);
             addCommand.ExecuteNonQuery();
 
             var idCommand = new MySqlCommand("SELECT Max(order_id) FROM `orders`;", Connection);
@@ -78,7 +85,7 @@ namespace CSCI467Library {
 
         Dictionary<int, int> GetQuantities(int id) {
             Dictionary<int, int> partQuantities = new Dictionary<int, int>();
-            var partCommand = new MySqlCommand("FROM parts_list SELECT * WHERE order_id = " + id, Connection);
+            var partCommand = new MySqlCommand("SELECT * FROM `parts_list` WHERE order_id = " + id, Connection);
             var partReader = partCommand.ExecuteReader();
 
             while (partReader.Read()) {
