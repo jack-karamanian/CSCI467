@@ -8,7 +8,7 @@ namespace CSCI467PlaceOrderMVC
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            
         }
     }
 }

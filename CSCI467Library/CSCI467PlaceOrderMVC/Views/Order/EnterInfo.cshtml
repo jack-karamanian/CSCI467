@@ -49,7 +49,7 @@
 <div>
     <h2>Subtotal:</h2>
     <h2>
-        @{double total = 0.0f;}
+        $@{double total = 0.0f;}
         @foreach (var order in Orders) {
             total += order.Quantity * Convert.ToDouble(order.Part.Price);
         }
@@ -62,28 +62,29 @@
     <form action="/Order/EnterCreditCard" method="post">
         
         <label >First Name: </label>
-        @Html.EditorFor(m => m.FirstName)
+        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { required = "required" } })
+        
         <br>
 
         <label>Last Name: </label>
-        @Html.EditorFor(m => m.LastName)
+        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { required = "required" } })
         <br>
 
         <label>Address: </label>
-        @Html.EditorFor(m => m.Address)
+        @Html.EditorFor(m => m.Address, new { htmlAttributes = new { required = "required" } })
         <br>
 
         <label>State/Province: </label>
         <select id="State" name="State">
-            @{ var states = ViewBag.TaxInfo.Keys; }
-            @foreach (var state in states) {
+            @{ var taxes = (IList<CSCI467PlaceOrderMVC.Models.TaxShippingModel>)ViewBag.TaxInfo; }
+            @foreach (var state in taxes.Select(t => t.State).Distinct()) {
                 <option value="@state">@state</option>
             }
         </select>
         <br>
 
         <label for="zipCode">ZIP Code:</label>
-        @Html.EditorFor(m => m.ZIP)
+        @Html.EditorFor(m => m.ZIP, new { htmlAttributes = new { required = "required" } })
         <br>
 
         <input type="hidden" id="SubTotal" name ="SubTotal" value="@total" />

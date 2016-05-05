@@ -44,35 +44,35 @@
 <div>
     @{ 
         double subTotal = Convert.ToDouble(Model.SubTotal);
-        double shipping = subTotal * (ViewBag.TaxInfo[Model.State].StateRate / 100);
-        double tax = shipping;
+        double shipping = subTotal * (ViewBag.TaxInfo.Shipping / 100);
+        double tax = subTotal * (ViewBag.TaxInfo.Tax / 100);
      }
     <h2>Subtotal:</h2>
     <h3>
        @Html.DisplayFor(m => Model.SubTotal)
     </h3>
     <h2>Shipping:</h2>
-    <h3>@shipping</h3>
+    <h3>$@Math.Round(shipping, 2)</h3>
     <h2>Tax:</h2>
-    <h3>@tax</h3>
+    <h3>$@Math.Round(tax, 2)</h3>
     <h2>Total:</h2>
     <h3>
-        @(subTotal + shipping + tax )
+        $@Math.Round(subTotal + shipping + tax, 2)
     </h3>
 </div>
 
 <h2>Credit Card Information</h2>
 <form action="/Order/ProcessCreditCard" method="post">
     <label>Credit Card Holder Name: </label>
-    <input type="text" id="ccName" name="ccName"/>
+    <input type="text" id="ccName" name="ccName" required/>
     <br />
 
     <label>Credit Card Number: </label>
-    <input type="number" id="ccNumber" name="ccNumber"/>
+    <input type="number" id="ccNumber" name="ccNumber" required/>
     <br />
 
     <label>Expiration Date: </label>
-    <input type="month" id="expDate" name="expDate"/>
+    <input type="month" id="expDate" name="expDate" required/>
     <br />
 
     <input type="hidden" value="@(subTotal + tax + shipping)" name="amount"  id="amount" />

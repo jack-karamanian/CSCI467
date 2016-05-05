@@ -73,7 +73,7 @@ namespace CSCI467Library {
             addCommand.Parameters.AddWithValue("@shipping", order.Shipping);
             addCommand.ExecuteNonQuery();
 
-            var idCommand = new MySqlCommand("SELECT Max(order_id) FROM `orders`;", Connection);
+            var idCommand = new MySqlCommand("SELECT Max(order_num) FROM `orders`;", Connection);
             int id = (int)idCommand.ExecuteScalar();
             foreach (var pair in order.PartsOrdered) {
                 var quantityCommand = new MySqlCommand("INSERT INTO `parts_list` (order_id, part_id, quantity) VALUES (@order_id, @part_id, @quantity);", Connection);
