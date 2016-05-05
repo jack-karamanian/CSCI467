@@ -292,6 +292,10 @@
       <Project>{a8efb170-9712-4780-b653-556312b51c7c}</Project>
       <Name>CSCI467Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Database1\Database.sqlproj">
+      <Project>{d8be6c14-6853-49e3-b9bc-d0abb71fa36b}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
