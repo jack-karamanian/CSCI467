@@ -49,7 +49,7 @@ namespace CSCI467Library {
         public void AddOrder(Order order) {
             Connection.Open();
 
-            var addCommand = new MySqlCommand("INSERT INTO orders (order_num, time_ordered, fname, lname, address, state, zip_code, total, subtotal) VALUES (NULL, @time_ordered, @fname, @lname, @address, @state, @zip_code, @total, @subtotal)", Connection);
+            var addCommand = new MySqlCommand("INSERT INTO `orders` (order_num, time_ordered, fname, lname, address, state, zip_code, total, subtotal) VALUES (NULL, @time_ordered, @fname, @lname, @address, @state, @zip_code, @total, @subtotal)", Connection);
             addCommand.Parameters.AddWithValue("@time_ordered", DateTime.Now);
 
             var name = order.Customer.Name.Split(' ');
@@ -62,6 +62,16 @@ namespace CSCI467Library {
             addCommand.Parameters.AddWithValue("@total", order.Total);
             addCommand.Parameters.AddWithValue("@subtotal", order.SubTotal);
             addCommand.ExecuteNonQuery();
+
+            var idCommand = new MySqlCommand("SELECT Max(order_id) FROM `orders`;", Connection);
+            int id = (int)idCommand.ExecuteScalar();
+            foreach (var pair in order.PartsOrdered) {
+                var quantityCommand = new MySqlCommand("INSERT INTO `parts_list` (order_id, part_id, quantity) VALUES (@order_id, @part_id, @quantity);", Connection);
+                quantityCommand.Parameters.AddWithValue("@order_id", id);
+                quantityCommand.Parameters.AddWithValue("@part_id", pair.Key);
+                quantityCommand.Parameters.AddWithValue("@quantity", pair.Value);
+                quantityCommand.ExecuteNonQuery();
+            }
 
             Connection.Close();
         }
