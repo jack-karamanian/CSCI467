@@ -14,15 +14,15 @@ namespace CSCI467Library {
         public Customer Customer { get; set; }
         public Dictionary<int, int> PartsOrdered { get; private set; }
 
-        public Order(Address destination, DateTime timeOrdered, Tax taxes, double subTotal, double total, Customer customer, List<Part> parts) {
+        public Order(Address destination, DateTime timeOrdered, Tax taxes, double subTotal, double total, Customer customer, Dictionary<int, int> parts) {
             Destination = destination;
             TimeOrdered = timeOrdered;
             TaxRates = taxes;
             SubTotal = subTotal;
             Total = total;
             Customer = customer;
-            PartsOrdered = new Dictionary<int, int>();
-            FillParts(parts);
+            PartsOrdered = parts;
+            
         }
 
         private void FillParts(List<Part> parts) {
