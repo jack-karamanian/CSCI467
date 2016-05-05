@@ -44,8 +44,11 @@ namespace CSCI467Library {
 
         public void RemoveOldestOrder() {
             Connection.Open();
-            
-            var command = new MySqlCommand("DELETE FROM `orders` WHERE order_num = (SELECT order_num FROM `orders` WHERE time_ordered = MIN(time_ordered));", Connection);
+            var idCommand = new MySqlCommand("SELECT order_num FROM `orders` ORDER BY time_ordered ASC LIMIT 1", Connection);
+            int id = (int)idCommand.ExecuteScalar();
+            var command = new MySqlCommand("DELETE FROM `orders` WHERE order_num = " + id, Connection);
+            command.ExecuteNonQuery();
+            command.CommandText = "DELETE FROM `parts_list` WHERE order_id = " + id;
             command.ExecuteNonQuery();
 
             Connection.Close();
